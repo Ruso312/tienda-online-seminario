@@ -1,4 +1,54 @@
-<p>home-page works!</p>
+<!-- Header -->
+<header class="header">
+    <span>Logo</span>
+    <nav class="navigation">
+        <a class="nav-link" routerLink="/">Home</a>
+        <a class="nav-link" routerLink="/about">About</a>
+        <a class="nav-link" routerLink="/admin">Admin</a>
+    </nav>
+</header>
 
+<!-- Body -->
+<div class="main-container">
+    <section class="product-section">
+        <h2 class="section-title">Listado de productos</h2>
+        <div class="product-list">
+            @for (product of products; track product.id) {
+                <!-- Product cards -->
+                <div class="product-card">
+                    <div class="card-content">
+                        <h3>{{product.name}}</h3>
+                        <p>{{product.description}}</p>
+                    </div>
+                </div>
+            } @empty {
+                <p class="empty-message">No hay productos disponibles</p>
+            }
+        </div>
+    </section>
 
-<!-- <router-outlet /> -->
+    <aside class="cart-section">
+        <h2 class="section-title">Carrito de compras</h2>
+        <div class="cart-card">
+            <div class="cart-content">
+                <ul class="cart-list">
+                    <li *ngFor="let item of cartItems" class="cart-item">
+                        {{item.name}} - {{item.price | currency}}
+                    </li>
+                </ul>
+                <div class="divider"></div>
+                <div class="cart-total">
+                    <h3>Total: {{getTotal() | currency}}</h3>
+                </div>
+                <button class="checkout-btn">Comprar</button>
+            </div>
+        </div>
+    </aside>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-content">
+        <p>&copy; 2025 Mi Tienda Online. Todos los derechos reservados.</p>
+    </div>
+</footer>
